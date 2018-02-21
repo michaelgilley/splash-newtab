@@ -1,0 +1,63 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  transition: background .5s ease-in-out;
+  overflow: hidden;
+}
+#bg {
+  color: #fff;
+  font-size: 14px;
+  font-family: "Helvetica Neue";
+  letter-spacing: .2em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-position: 50% 50%;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+}
+#bg.show {
+  opacity: 1;
+  animation: .5s ease-out grow both;
+}
+.footer-target, .footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4em;
+  z-index: 1;
+}
+.footer {
+  z-index: 2;
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.6), transparent);
+  bottom: -4em;
+  transition: bottom .2s ease-in-out;
+}
+.footer-target:hover + .footer,
+.footer:hover {
+  bottom: 0;
+}
+.location {
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+}
+.exif {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+@keyframes grow {
+  from {
+    transform: scale(0.92);
+  }
+  to {
+    transform: scale(1);
+  }
+}
