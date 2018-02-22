@@ -18,26 +18,30 @@ connection.onMessage.addListener(({ type, payload }) => {
       document.body.style.backgroundColor = payload.color
       bg.style.backgroundImage = `url(${payload.url})`
 
-      const appendages = []
+      const photoLink = document.createElement('a')
+      photoLink.classList.add('photo-link')
+      photoLink.href = payload.link
+      photoLink.target = '_blank'
+      const rightTray = makeRegion('right-tray', photoLink)
+
+      const appendages = [rightTray]
 
       if (payload.location) {
         const location = makeRegion('location', payload.location.title)
-        appendages.push(location)
+        appendages.unshift(location)
       }
 
       if (payload.exif.model) {
         const { model, make } = payload.exif
         const contents = model.includes(make) ? model : `${make} ${model}`
         const exif = makeRegion('exif', contents)
-        appendages.push(exif)
+        rightTray.insertBefore(exif, rightTray.firstChild)
       }
 
-      if (appendages.length) {
-        const footerTarget = makeRegion('footer-target')
-        const footer = makeRegion('footer', appendages)
-        bg.appendChild(footerTarget)
-        bg.appendChild(footer)
-      }
+      const footerTarget = makeRegion('footer-target')
+      const footer = makeRegion('footer', appendages)
+      bg.appendChild(footerTarget)
+      bg.appendChild(footer)
 
       const img = new Image()
       img.src = payload.url

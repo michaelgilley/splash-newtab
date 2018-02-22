@@ -27,7 +27,8 @@ function makeRequest () {
       urls: { full: url },
       location,
       exif,
-    }) => ({ color, url, location, exif }))
+      links: { html: link },
+    }) => ({ color, url, location, exif, link }))
     IMAGES.push(...imgs)
     warmCache()
     resolve(imgs)
