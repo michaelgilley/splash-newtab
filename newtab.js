@@ -22,13 +22,13 @@ connection.onMessage.addListener(({ type, payload }) => {
       photoLink.classList.add('photo-link')
       photoLink.href = payload.link
       photoLink.target = '_blank'
+      const location = makeRegion('location')
       const rightTray = makeRegion('right-tray', photoLink)
 
-      const appendages = [rightTray]
+      const appendages = [location, rightTray]
 
       if (payload.location) {
-        const location = makeRegion('location', payload.location.title)
-        appendages.unshift(location)
+        location.appendChild(document.createTextNode(payload.location.title))
       }
 
       if (payload.exif.model) {
